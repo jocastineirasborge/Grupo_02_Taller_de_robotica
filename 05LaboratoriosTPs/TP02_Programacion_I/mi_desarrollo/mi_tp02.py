@@ -59,18 +59,18 @@ def motivo_de_rechazo(comando):
     """
     # 1. Tiene que ser una tupla.
     if type(comando) != tuple:
-        return "no es una tupla de comando, es un " + type(comando).__name__
+        return "No es una tupla de comando, es un " + type(comando).__name__
 
     # 2. La tupla no puede estar vacia.
     if len(comando) == 0:
-        return "la tupla esta vacia y no dice que hacer"
+        return "La tupla esta vacia y no dice que hacer"
 
     accion = comando[0]
     datos = len(comando) - 1 #Cuantos datos vinieron ademas del nombre
 
     # 3. El nombre tiene que ser uno de los cuatro validos.
     if accion not in COMANDOS_CON_DATOS and accion not in COMANDOS_SIN_DATOS:
-        return "el comando '" + str(accion) + "' no existe"
+        return "El comando '" + str(accion) + "' no existe"
 
     # 4. "detenerse" y "saludar" no llevan datos.
     if accion in COMANDOS_SIN_DATOS:
@@ -88,14 +88,14 @@ def motivo_de_rechazo(comando):
 
     # 6. Velocidad y tiempo tienen que ser numeros, no textos.
     if not es_numero(velocidad):
-        return "la velocidad tiene que ser un numero y llego '" + str(velocidad) + "'"
+        return "La velocidad tiene que ser un numero y llego '" + str(velocidad) + "'"
 
     if not es_numero(tiempo):
-        return "el tiempo tiene que ser un numero y llego '" + str(tiempo) + "'"
+        return "El tiempo tiene que ser un numero y llego '" + str(tiempo) + "'"
 
     # 7. El tiempo no puede ser negativo.
     if tiempo < 0:
-        return "el tiempo no puede ser negativo (" + str(tiempo) + " s)"
+        return "El tiempo no puede ser negativo (" + str(tiempo) + " s)"
 
     return SIN_MOTIVO
 

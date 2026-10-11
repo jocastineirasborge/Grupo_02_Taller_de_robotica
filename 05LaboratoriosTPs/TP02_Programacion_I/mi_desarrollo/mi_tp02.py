@@ -21,7 +21,7 @@ from misiones import MISION_BASICA, MISION_CON_ERRORES, MISION_CUADRADO, MISION_
 #  CONSTANTES
 # =====================================================================
 
-# Los cuatro comandos que el robot entiende los separo en dos grupos
+# Los cuatro comandos que el robot entiende los separamos en dos grupos
 # porque "avanzar" y "girar" llevan velocidad y tiempo, y los otros dos
 # no llevan ningun dato.
 
@@ -39,7 +39,6 @@ SIN_MOTIVO = ""
 # =====================================================================
 #  FUNCIONES AUXILIARES
 # =====================================================================
-
 def es_numero(valor):
     """
     Objetivo: Validar que el parámetro corresponde a un número ya sea entero o flotante.
@@ -141,7 +140,6 @@ def ejecutar_comando(robot, comando):
     igual (por ejemplo, si la velocidad supera el limite de la materia).
     Eso llega como un ErrorDeSeguridad y conviene atraparlo.
     """
-    # TU CODIGO ACA
     accion = comando[0]
 
     try:
@@ -181,7 +179,6 @@ def ejecutar_mision(robot, mision, historial):
 
     Un comando invalido NO tiene que cortar la mision.
     """
-    # TU CODIGO ACA
     print("\nArranca la mision: " + str(len(mision)) + " comandos")
     print("-" * 68)
     for numero, comando in enumerate(mision, start=1):
@@ -195,12 +192,12 @@ def ejecutar_mision(robot, mision, historial):
             else:
                 estado = "rechazado"
                 motivo = detalle.replace(RECHAZADO + ": ", "", 1)
-                capa = "el robot"
+                capa = "El robot"
         else:
             motivo = motivo_de_rechazo(comando)
             detalle = RECHAZADO + ": " + motivo
             estado = "Rechazado"
-            capa = "Mi validación"
+            capa = "Nuestra validación"
         print("  " + str(numero).rjust(2) + ". " + str(comando))
         print("      -> " + detalle)
 
@@ -226,16 +223,15 @@ def generar_reporte(historial):
       - cuantos se rechazaron
       - cual fue el motivo de cada rechazo
     """
-    # TU CODIGO ACA
-    """Contamos cuántos comandos se procesaron en total"""
+    #Contamos cuántos comandos se procesaron en total
     total = len(historial)
     
-    """Filtramos el historial usando comprensión de listas:"""
+    #Filtramos el historial usando comprensión de listas
     # Separo los pasos en dos listas con una comprension de listas.
     ejecutados = [paso for paso in historial if paso["estado"] == "Ejecutado"]
     rechazados = [paso for paso in historial if paso["estado"] == "Rechazado"]
 
-    """Imprimimos el encabezado y las métricas principales de la misión"""
+    #Imprimimos el encabezado y las métricas principales de la misión
     print("\n" + "=" * 68)
     print("                      REPORTE FINAL DE LA MISION                      ")
     print("=" * 68)
@@ -243,13 +239,13 @@ def generar_reporte(historial):
     print(f"  Ejecutados         : {len(ejecutados)}")
     print(f"  Rechazados         : {len(rechazados)}")
 
-    """Calculamos y mostramos el porcentaje de efectividad (evitando división por cero)"""
+    #Calculamos y mostramos el porcentaje de efectividad (evitando división por cero)
     if total > 0:
         porcentaje = (len(ejecutados) * 100) / total
         # El modificador :.1f redondea el número automáticamente a un decimal
         print(f"  Porcentaje OK      : {porcentaje:.1f} %")
 
-    """Verificamos si hubo rechazos para cambiar el mensaje final"""
+    #Verificamos si hubo rechazos para cambiar el mensaje final
     if len(rechazados) == 0:
         print("\n  No hubo rechazos: La misión se ejecutó completa.")
     else:
@@ -273,7 +269,7 @@ def main():
     print("3. Misión con Errores")
     print("4. Misión Larga")
     
-    opcion = input("Elija la misión que desea ejecutar (1-4): ").strip()
+    opcion = input("Elija la misión que desee ejecutar (1-4): ").strip()
 
     if opcion == "1":
         mision_elegida = MISION_BASICA

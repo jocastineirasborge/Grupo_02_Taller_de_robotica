@@ -147,25 +147,25 @@ def ejecutar_comando(robot, comando):
     try:
         if accion == "avanzar":
             robot.avanzar(velocidad=comando[1], tiempo=comando[2])
-            return "Comando avanzar ejecutado correctamente"
+            return (OK + " El robot ha avanzado correctamente")
  
         elif accion == "girar":
             robot.girar(velocidad=comando[1], tiempo=comando[2])
-            return "Comando girar ejecutado correctamente"
+            return (OK + " El robot ha girado correctamente")
  
         elif accion == "detenerse":
             robot.detenerse()
-            return "Robot detenido correctamente"
+            return (OK + " El robot se ha detenido correctamente")
  
         elif accion == "saludar":
             robot.saludar()
-            return "Saludo ejecutado correctamente"
+            return (OK + " El robot ha saludado correctamente")
  
         else:
-            return "Comando desconocido"
+            return RECHAZADO + ": Comando desconocido"
  
     except ErrorDeSeguridad as error:
-        return f"Comando rechazado: {error}"
+        return RECHAZADO + ": El robot ha frenado por seguridad" 
 
 
 # =====================================================================
@@ -189,7 +189,7 @@ def ejecutar_mision(robot, mision, historial):
             detalle = ejecutar_comando(robot, comando)
     
             if detalle.startswith(OK):
-                estado = "ejecutado"
+                estado = "Ejecutado"
                 motivo = SIN_MOTIVO
                 capa = "-"
             else:
@@ -199,8 +199,8 @@ def ejecutar_mision(robot, mision, historial):
         else:
             motivo = motivo_de_rechazo(comando)
             detalle = RECHAZADO + ": " + motivo
-            estado = "rechazado"
-            capa = "mi validacion"
+            estado = "Rechazado"
+            capa = "Mi validación"
         print("  " + str(numero).rjust(2) + ". " + str(comando))
         print("      -> " + detalle)
 
@@ -232,8 +232,8 @@ def generar_reporte(historial):
     
     """Filtramos el historial usando comprensión de listas:"""
     # Separo los pasos en dos listas con una comprension de listas.
-    ejecutados = [paso for paso in historial if paso["estado"] == "ejecutado"]
-    rechazados = [paso for paso in historial if paso["estado"] == "rechazado"]
+    ejecutados = [paso for paso in historial if paso["estado"] == "Ejecutado"]
+    rechazados = [paso for paso in historial if paso["estado"] == "Rechazado"]
 
     """Imprimimos el encabezado y las métricas principales de la misión"""
     print("\n" + "=" * 68)
@@ -251,14 +251,14 @@ def generar_reporte(historial):
 
     """Verificamos si hubo rechazos para cambiar el mensaje final"""
     if len(rechazados) == 0:
-        print("\n  No hubo rechazos: la mision se ejecuto completa.")
+        print("\n  No hubo rechazos: La misión se ejecutó completa.")
     else:
         print("\n  Motivo de cada rechazo:")
         # Recorremos la lista de rechazados despaquetando cada tupla
         for paso in rechazados:
-            print("    - comando " + str(paso["numero"]) + " " + str(paso["comando"]))
-            print("      motivo  : " + paso["motivo"])
-            print("      lo freno: " + paso["capa"])
+            print("    - Comando " + str(paso["numero"]) + " " + str(paso["comando"]))
+            print("      Motivo  : " + paso["motivo"])
+            print("      Lo frenó: " + paso["capa"])
 
     print("=" * 68 + "\n")
 

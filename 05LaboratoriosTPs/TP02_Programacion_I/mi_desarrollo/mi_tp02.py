@@ -9,8 +9,11 @@
 #    2. Espera a que aparezca la ventana con el robot
 #    3. Recien ahi ejecuta este archivo
 #
-#  Nombre y apellido:  .....................................
-#  Comision:           .....................................
+#  Nombre y apellido:  - José Ignacio Castiñeiras
+#                      - Ezequiel Lado Galeano
+#                      - Agustín Gonzalez
+#                      - Martín García Berro
+#  Comision:           582918
 # =====================================================================
 
 from robot import ErrorDeSeguridad, Robot
